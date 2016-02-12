@@ -1,6 +1,6 @@
 {
   "name": "zen-i18n",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "flexible i18n",
   "main": "index.js",
   "author": {
@@ -9,9 +9,11 @@
     "url": "http://flatdev.ru/"
   },
   "scripts": {
+    "start": "gulp watch",
     "test": "mocha ./test",
     "test-ci": "istanbul cover ./node_modules/mocha/bin/_mocha ./test",
-    "prepublish": "npm run test"
+    "lint": "gulp lint",
+    "prepublish": "npm run lint && npm run test"
   },
   "keywords": [
     "template",
@@ -33,6 +35,11 @@
   },
   "devDependencies": {
     "assert": "^1.3.0",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^1.1.1",
+    "gulp-plumber": "^1.1.0",
+    "gulp-util": "^3.0.7",
+    "js-yaml": "^3.5.3",
     "mocha": "^2.4.5"
   },
   "dependencies": {

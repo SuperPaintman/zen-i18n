@@ -1,0 +1,141 @@
+---
+env:
+  browser: true
+  node: true
+  es6: true
+
+rules:
+  indent: 
+  - 2
+  - 2
+  - SwitchCase: 1
+  no-mixed-spaces-and-tabs:
+  - 1
+
+  max-len:
+  - 1
+  - 80
+  - 4
+  # - ignoreComments: true
+  #   ignoreUrls: true
+
+  no-extra-semi: 2
+  semi-spacing:
+  - 2
+  - before: false
+    after: true
+  semi:
+  - 2
+  - always
+
+  no-extra-boolean-cast: 2
+
+  radix: 2
+  wrap-iife:
+  - 2
+  - inside
+  yoda: 2
+
+  # Variables
+  no-delete-var: 2
+  no-label-var: 2
+  no-shadow-restricted-names: 2
+  no-undef-init: 2
+  no-undef:
+  - 2
+  - typeof: true
+  no-unused-vars:
+  - 2
+  - vars: all
+    args: none  # Не проверять неиспользуемые аргументы в функциях
+  no-use-before-define:
+  - 2
+  - nofunc
+
+  # Node.js
+  no-path-concat: 2
+  no-restricted-modules:
+  - 2
+  - domain
+  - freelist
+  - smalloc
+  - sys
+
+  # Stylistic Issues
+  brace-style:
+  - 2
+  - 1tbs
+  - allowSingleLine: false
+  camelcase:
+  - 2
+  - properties: always
+  comma-spacing:
+  - 2
+  - before: false
+    after: true
+  comma-style:
+  - 2
+  - last
+  comma-dangle:
+  - 2
+  - never
+
+  # Spaces
+  array-bracket-spacing:
+  - 2
+  - never
+
+  eol-last: 2
+  no-multiple-empty-lines:
+  - 2
+  - max: 2
+
+  linebreak-style:
+  - 2
+  - unix
+
+  space-after-keywords:
+  - 2
+  - always
+  space-before-keywords:
+  - 2
+  - always
+  space-before-blocks: 
+  - 2
+  - always
+  space-before-function-paren:
+  - 2
+  - anonymous: always
+    named: never
+  space-in-parens:
+  - 2
+  - never
+  space-infix-ops: 2
+  space-return-throw-case: 2
+  space-unary-ops: 2
+
+  # JSDOC
+  require-jsdoc: 1
+  # valid-jsdoc:
+  # - 2
+  # - requireReturn: false
+  #   prefer:
+  #     returns: return
+
+  # ES2015
+  arrow-parens:
+  - 2
+  - always
+  arrow-spacing:
+  - 2
+  - before: true
+    after: true
+  constructor-super: 2
+  generator-star-spacing:
+  - 2
+  - both
+  no-class-assign: 2
+  no-const-assign: 2
+  no-dupe-class-members: 2
+  no-this-before-super: 2
+...
