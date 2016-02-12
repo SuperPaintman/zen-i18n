@@ -6,7 +6,7 @@
 [![NPM Downloads][npm-dm-image]][npm-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
 
-Flexible [**i18n**][wikipedia-link]
+Flexible [**i18n**][wikipedia-link] internationalization for **node.js**
 
 
 ## Installation
@@ -17,6 +17,68 @@ npm install zen-i18n --save
 --------------------------------------------------------------------------------
 
 ## Usage
+```js
+'use strict';
+const I18n = require('zen-i18n');
+
+const i18n = new I18n();
+
+i18n
+  .add(`${__dirname}/locals/ru.yml`, 'ru')
+  .add(`${__dirname}/locals/de.json`, 'de')
+  .add({
+    "hello": 'hei'
+  }, 'fi')
+  .add([{
+    from: `very long text,
+           multiline text....`,
+    to:   `очень длинный,
+           многострочный текст....`,
+  }], 'ru');
+
+const __ = i18n.get;
+
+console.log(__('hello', 'fi')); // -> hei
+// or
+i18n.setLocale('fi');
+console.log(__('hello')); // -> hei
+
+i18n.resetLocale();
+console.log(__('hello')); // -> hello
+```
+
+### File examples
+The file content type and its extension detected automatically.
+
+**Array-like**:
+
+```yaml
+# ru.yml
+- form: hello
+  to: привет
+```
+
+```json
+// ru.json
+[{
+  "form": "hello",
+  "to": "привет"
+}]
+```
+
+**Object-like**:
+
+```yaml
+# ru.yml
+hello: привет
+```
+
+```json
+// ru.json
+{
+  "hello": "привет"
+}
+```
 
 --------------------------------------------------------------------------------
 
@@ -25,6 +87,8 @@ npm install zen-i18n --save
 --------------------------------------------------------------------------------
 
 ## Changelog
+### 0.1.0 [`Stable`]
+* **Added**: first release
 
 --------------------------------------------------------------------------------
 
