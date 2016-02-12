@@ -1,0 +1,6 @@
+---
+- from: "hello"
+  to: "привет"
+- from: "your name"
+  to: "ваше имя"
+...
