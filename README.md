@@ -30,7 +30,7 @@ i18n
     "hello": 'hei'
   }, 'fi')
   .add([{
-    from: `very long text,
+    from: `very long,
            multiline text....`,
     to:   `очень длинный,
            многострочный текст....`,
