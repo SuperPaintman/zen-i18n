@@ -1,2 +1,2 @@
 'use strict';
-module.exports = require("./lib/i18n");
+module.exports = require("./bin/lib/i18n");

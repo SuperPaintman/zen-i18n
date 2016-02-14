@@ -1,15 +1,43 @@
 'use strict';
-/** Requires */
-const fs            = require('fs');
-const path          = require('path');
+/// <reference path="../../typings/tds.d.ts"/>
 
-const _             = require('lodash');
-const yaml          = require('js-yaml');
+/** Requires */
+import fs         = require('fs');
+import path       = require('path');
+import _          = require('lodash');
+import yaml       = require('js-yaml');
+
+interface I18nOptions {
+  default: string;
+}
+
+interface I18nLangObj {
+  [from: string]: string
+}
+
+interface I18nArrItem {
+  from: string;
+  to: string;
+}
+
+interface I18nLanguages {
+  [lang: string]: I18nLangObj;
+}
+
+interface PathParseObj {
+  ext: string;
+}
 
 /**
  * @class I18n
  */
 class I18n {
+  private options: I18nOptions;
+
+  private currentLanguage: string;
+
+  private languages: I18nLanguages;
+
   /**
    * @param  {Object} [options]
    * @param  {String} [options.default]   - язык по умолчанию
@@ -18,7 +46,7 @@ class I18n {
    * 
    * @constructs I18n
    */
-  constructor(options) {
+  constructor(options: I18nOptions) {
     this.options = _.merge({
       default: 'en'
     }, options);
@@ -38,17 +66,17 @@ class I18n {
    *
    * @member I18n#add
    */
-  add(filename, lang) {
+  add(filename: (string|I18nArrItem[]|I18nLangObj), lang?: string): I18n {
     if (lang === undefined) {
       lang = this.options.default;
     }
 
     // Проверка является ли первый аргумент именем файла
     if (_.isString(filename)) {
-      const pathInfo = path.parse(filename);
-      const ext = pathInfo.ext.slice(1).toLowerCase();
+      const pathInfo: PathParseObj = path.parse(filename);
+      const ext: string = pathInfo.ext.slice(1).toLowerCase();
 
-      let data;
+      let data: any;
       switch (ext) {
         case 'yml':
           data = yaml.load(fs.readFileSync(
@@ -66,12 +94,12 @@ class I18n {
 
       this.languages[lang] = _.merge(this.languages[lang], data);
     } else if (_.isArray(filename)) {
-      const data = filename;
+      const data: I18nArrItem[] = filename;
       // Если первый аргумент массив
       this.languages[lang] = _.merge(this.languages[lang]
         , this._transform(data));
     } else if (_.isObject(filename)) {
-      const data = filename;
+      const data: I18nLangObj = filename;
       // Если первый аргумент объект
       this.languages[lang] = _.merge(this.languages[lang], data);
     }
@@ -89,7 +117,7 @@ class I18n {
    *
    * @member I18n#get
    */
-  get(text, lang) {
+  get(text: string, lang?: string): string {
     if (lang === undefined) {
       lang = this.currentLanguage;
     }
@@ -99,7 +127,7 @@ class I18n {
       return text;
     }
 
-    const translatedText = this.languages[lang][text];
+    const translatedText: string = this.languages[lang][text];
     if (translatedText !== undefined) {
       return translatedText;
     } else {
@@ -115,7 +143,7 @@ class I18n {
    *
    * @member I18n#setLocale
    */
-  setLocale(lang) {
+  setLocale(lang: string): I18n {
     if (this.languages[lang]) {
       this.currentLanguage = lang;
     } else {
@@ -131,7 +159,7 @@ class I18n {
    *
    * @member I18n#getLocale
    */
-  getLocale() {
+  getLocale(): string {
     return this.currentLanguage;
   }
 
@@ -141,7 +169,7 @@ class I18n {
    *
    * @member I18n#resetLocale
    */
-  resetLocale() {
+  resetLocale(): I18n {
     this.currentLanguage = this.options.default;
     return this;
   }
@@ -155,9 +183,9 @@ class I18n {
    * @member I18n#_transform
    * @private
    */
-  _transform(data) {
+  private _transform(data: (I18nArrItem[]|I18nLangObj)): I18nLangObj {
     if (_.isArray(data)) {
-      return _.reduce(data, (res, item) => {
+      return _.reduce(data, (res, item: I18nArrItem) => {
         res[item.from] = item.to;
         return res;
       }, {});

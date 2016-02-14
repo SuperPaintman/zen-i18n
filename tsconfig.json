@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "declaration": false,
+    "noImplicitAny": false,
+    "removeComments": false,
+    "noLib": false,
+    "sourceMap": false,
+    "outDir": "./bin/"
+  },
+  "filesGlob": [
+    "./development/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

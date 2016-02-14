@@ -4,6 +4,7 @@ const fs        = require('fs');
 const path      = require('path');
 
 const gulp      = require('gulp');
+const ts        = require('gulp-typescript');
 const eslint    = require('gulp-eslint');
 
 const gutil     = require('gulp-util');
@@ -11,10 +12,14 @@ const plumber   = require('gulp-plumber');
 const yaml      = require('js-yaml');
 
 /** Constants */
-const jsPath = [
-  "./**/*.js",
-  "!./node_modules/**/*"
-];
+const tsPath = {
+  from: [
+    "./typings/**/*.ts",
+    "./development/**/*.ts",
+    "!./node_modules/**/*"
+  ],
+  to: "./bin/"
+};
 
 /** Helps */
 function onError(err) {
@@ -28,11 +33,23 @@ function onError(err) {
 }
 
 /** Tasks */
+gulp.task("build", () => {
+  return gulp.src(tsPath.from)
+    /** @todo: Пламбер перезапускает TS */
+    // .pipe(plumber({
+    //   errorHandler: onError
+    // }))
+    .pipe(ts(ts.createProject('tsconfig.json')))
+    .pipe(gulp.dest(tsPath.to));
+});
+
 gulp.task("lint", () => {
-  gulp.src(jsPath)
-    .pipe(plumber({
-      errorHandler: onError
-    }))
+  return gulp.src(tsPath.from)
+    /** @todo: Пламбер перезапускает TS */
+    // .pipe(plumber({
+    //   errorHandler: onError
+    // }))
+    .pipe(ts(ts.createProject('tsconfig.json')))
     .pipe(eslint(yaml.load(
       fs.readFileSync(path.join(__dirname, "./.eslintrc.yml"))
     )))
@@ -41,7 +58,7 @@ gulp.task("lint", () => {
 });
 
 gulp.task("watch", () => {
-  gulp.watch(jsPath, ["lint"]);
+  gulp.watch(tsPath.from, ["build"]);
 });
 
-gulp.task("default", ["lint"]);
+gulp.task("default", ["build", "lint"]);

@@ -7,7 +7,8 @@ env:
 rules:
   indent: 
   - 2
-  - 2
+  # - 2 # TODO: TypeScript
+  - 4
   - SwitchCase: 1
   no-mixed-spaces-and-tabs:
   - 1
@@ -63,7 +64,8 @@ rules:
 
   # Stylistic Issues
   brace-style:
-  - 2
+  # - 2 # TODO: TypeScript
+  - 1
   - 1tbs
   - allowSingleLine: false
   camelcase:

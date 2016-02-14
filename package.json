@@ -1,7 +1,7 @@
 {
   "name": "zen-i18n",
-  "version": "0.1.11",
-  "description": "flexible i18n internationalization for node.js", 
+  "version": "0.1.12",
+  "description": "flexible i18n internationalization for node.js",
   "main": "./index.js",
   "author": {
     "name": "SuperPaintman",
@@ -10,10 +10,11 @@
   },
   "scripts": {
     "start": "gulp watch",
+    "build": "gulp build",
     "test": "mocha ./test",
     "test-ci": "istanbul cover ./node_modules/mocha/bin/_mocha ./test",
     "lint": "gulp lint",
-    "prepublish": "npm run lint && npm run test"
+    "prepublish": "npm run build && npm run lint && npm run test"
   },
   "keywords": [
     "template",
@@ -26,6 +27,10 @@
     "internationalization"
   ],
   "files": [
+    "development",
+    "bin",
+    "tsd.json",
+    "tsconfig.json",
     "README",
     "README.md",
     "lib",
@@ -43,9 +48,11 @@
     "gulp": "^3.9.1",
     "gulp-eslint": "^1.1.1",
     "gulp-plumber": "^1.1.0",
+    "gulp-typescript": "^2.11.0",
     "gulp-util": "^3.0.7",
     "js-yaml": "^3.5.3",
-    "mocha": "^2.4.5"
+    "mocha": "^2.4.5",
+    "typescript": "^1.7.5"
   },
   "dependencies": {
     "js-yaml": "^3.5.3",

@@ -5,7 +5,7 @@ const path      = require('path');
 
 const assert    = require('assert');
 
-const I18n      = require('../lib/i18n');
+const I18n      = require('../bin/lib/i18n');
 
 describe("I18n lib", () => {
   /** Add */
