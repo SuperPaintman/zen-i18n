@@ -1,15 +1,15 @@
 'use strict';
 /** Requires */
-const fs        = require('fs');
-const path      = require('path');
+import fs         from 'fs';
+import path       from 'path';
 
-const gulp      = require('gulp');
-const ts        = require('gulp-typescript');
-const eslint    = require('gulp-eslint');
+import gulp       from 'gulp';
+import ts         from 'gulp-typescript';
+import eslint     from 'gulp-eslint';
 
-const gutil     = require('gulp-util');
-const plumber   = require('gulp-plumber');
-const yaml      = require('js-yaml');
+import gutil      from 'gulp-util';
+import plumber    from 'gulp-plumber';
+import yaml       from 'js-yaml';
 
 /** Constants */
 const tsPath = {

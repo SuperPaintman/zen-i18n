@@ -10,8 +10,8 @@ install:
   - "npm install -g istanbul"
   - "npm install -g typescript"
   - "npm install -g tsd"
-  - "npm install"
   - "tsd reinstall --save"
+  - "npm install"
   - "npm run build"
 build: off
 test_script:
