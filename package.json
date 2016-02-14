@@ -45,8 +45,6 @@
   },
   "devDependencies": {
     "assert": "^1.3.0",
-    "babel-preset-es2015": "^6.5.0",
-    "babel-register": "^6.5.2",
     "gulp": "^3.9.1",
     "gulp-eslint": "^1.1.1",
     "gulp-plumber": "^1.1.0",
