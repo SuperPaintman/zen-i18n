@@ -2,10 +2,10 @@
 /// <reference path="../../typings/tds.d.ts"/>
 
 /** Requires */
-import fs         = require('fs');
-import path       = require('path');
-import _          = require('lodash');
-import yaml       = require('js-yaml');
+import * as fs         from 'fs';
+import * as path       from 'path';
+import * as _          from 'lodash';
+import * as yaml       from 'js-yaml';
 
 interface I18nOptions {
   default: string;
