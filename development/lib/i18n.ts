@@ -175,6 +175,16 @@ class I18n {
   }
 
   /**
+   * Создает независимую функцию get
+   * @return {Function}
+   *
+   * @member I18n#toUnderscore
+   */
+  toUnderscore(): Function {
+    return this.get.bind(this);
+  }
+
+  /**
    * Преобразование массива в таблицу ключ -> значение
    * @param  {Array|Object} data
    * 

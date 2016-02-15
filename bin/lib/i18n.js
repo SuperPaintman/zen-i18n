@@ -130,6 +130,15 @@ var I18n = (function () {
         return this;
     };
     /**
+     * Создает независимую функцию get
+     * @return {Function}
+     *
+     * @member I18n#toUnderscore
+     */
+    I18n.prototype.toUnderscore = function () {
+        return this.get.bind(this);
+    };
+    /**
      * Преобразование массива в таблицу ключ -> значение
      * @param  {Array|Object} data
      *

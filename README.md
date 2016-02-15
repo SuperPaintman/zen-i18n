@@ -38,7 +38,7 @@ i18n
            многострочный текст....`,
   }], 'ru');
 
-const __ = i18n.get.bind(i18n); // or use like: i18n.get("hello")
+const __ = i18n.toUnderscore(); // or use like: i18n.get("hello")
 
 console.log(__('hello', 'fi')); // -> hei
 // or
@@ -89,6 +89,9 @@ hello: привет
 --------------------------------------------------------------------------------
 
 ## Changelog
+### 0.2.0 [`Stable`]
+* **Added**: `#toUnderscore()` returns independent function `#get()`
+
 ### 0.1.0 [`Stable`]
 * **Added**: first release
 

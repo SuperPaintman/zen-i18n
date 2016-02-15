@@ -378,4 +378,65 @@ describe("I18n lib", () => {
       assert.equal(i18n.get("your name"), "your name");
     });
   });
+
+  /* toUnderscore */
+  describe("#toUnderscore()", () => {
+    it("should return valid translation", function () {
+      const i18n = new I18n({
+        default: 'en'
+      });
+
+      i18n
+        .add({
+          "hello": "привет",
+          "your name": "ваше имя"
+        }, 'ru')
+        .add({"bye": "пока"}, 'ru')
+        .add({"bye": "tschüss"}, 'de');
+
+      const __ = i18n.toUnderscore();
+
+      // Equivalent to the original function
+      /* en */
+      assert.equal(__("hello"), i18n.get("hello"));
+      assert.equal(__("bye"), i18n.get("bye"));
+      assert.equal(__("your name"), i18n.get("your name"));
+
+      assert.equal(__("hello", 'en'), i18n.get("hello", 'en'));
+      assert.equal(__("bye", 'en'), i18n.get("bye", 'en'));
+      assert.equal(__("your name", 'en'), i18n.get("your name", 'en'));
+
+      /* de */
+      assert.equal(__("bye", 'de'), i18n.get("bye", 'de'));
+      // such word is undefined
+      assert.equal(__("hello", 'de'), i18n.get("hello", 'de'));
+      assert.equal(__("your name", 'de'), i18n.get("your name", 'de'));
+
+      /* ru */
+      assert.equal(__("hello", 'ru'), i18n.get("hello", 'ru'));
+      assert.equal(__("bye", 'ru'), i18n.get("bye", 'ru'));
+      assert.equal(__("your name", 'ru'), i18n.get("your name", 'ru'));
+
+      // Equivalent to the valid translation
+      /* en */
+      assert.equal(__("hello"), "hello");
+      assert.equal(__("bye"), "bye");
+      assert.equal(__("your name"), "your name");
+
+      assert.equal(__("hello", 'en'), "hello");
+      assert.equal(__("bye", 'en'), "bye");
+      assert.equal(__("your name", 'en'), "your name");
+
+      /* de */
+      assert.equal(__("bye", 'de'), "tschüss");
+      // such word is undefined
+      assert.equal(__("hello", 'de'), "hello");
+      assert.equal(__("your name", 'de'), "your name");
+
+      /* ru */
+      assert.equal(__("hello", 'ru'), "привет");
+      assert.equal(__("bye", 'ru'), "пока");
+      assert.equal(__("your name", 'ru'), "ваше имя");
+    });
+  });
 });
