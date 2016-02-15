@@ -439,4 +439,58 @@ describe("I18n lib", () => {
       assert.equal(__("your name", 'ru'), "ваше имя");
     });
   });
+
+  describe("#toUnderscore(defaultLang)", () => {
+    it("should return valid translation", function () {
+      const i18n = new I18n({
+        default: 'en'
+      });
+
+      i18n
+        .add({
+          "hello": "привет",
+          "your name": "ваше имя"
+        }, 'ru')
+        .add({"bye": "пока"}, 'ru')
+        .add({"bye": "tschüss"}, 'de');
+
+      const __en = i18n.toUnderscore('en');
+      const __ru = i18n.toUnderscore('ru');
+      const __de = i18n.toUnderscore('de');
+
+      // Without lang
+      /* en */
+      assert.equal(__en("hello"), "hello");
+      assert.equal(__en("bye"), "bye");
+      assert.equal(__en("your name"), "your name");
+
+      /* de */
+      assert.equal(__de("bye"), "tschüss");
+      // such word is undefined
+      assert.equal(__de("hello"), "hello");
+      assert.equal(__de("your name"), "your name");
+
+      /* ru */
+      assert.equal(__ru("hello"), "привет");
+      assert.equal(__ru("bye"), "пока");
+      assert.equal(__ru("your name"), "ваше имя");
+
+      // With lang
+      /* en */
+      assert.equal(__de("hello", 'en'), "hello");
+      assert.equal(__de("bye", 'en'), "bye");
+      assert.equal(__de("your name", 'en'), "your name");
+
+      /* de */
+      assert.equal(__en("bye", 'de'), "tschüss");
+      // such word is undefined
+      assert.equal(__en("hello", 'de'), "hello");
+      assert.equal(__en("your name", 'de'), "your name");
+
+      /* ru */
+      assert.equal(__de("hello", 'ru'), "привет");
+      assert.equal(__de("bye", 'ru'), "пока");
+      assert.equal(__de("your name", 'ru'), "ваше имя");
+    });
+  });
 });

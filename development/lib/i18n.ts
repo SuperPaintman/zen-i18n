@@ -176,12 +176,25 @@ class I18n {
 
   /**
    * Создает независимую функцию get
+   * @param  {string}   [defaultLang]
+   * 
    * @return {Function}
    *
    * @member I18n#toUnderscore
    */
-  toUnderscore(): Function {
-    return this.get.bind(this);
+  toUnderscore(defaultLang?: string): Function {
+    // Устанавливаем дефолтный язык
+    if (defaultLang) {
+      return (function __(text: string, lang?: string): string {
+        if (lang) {
+          return this.get(text, lang);
+        } else {
+          return this.get(text, defaultLang);
+        }
+      }).bind(this);
+    } else {
+      return this.get.bind(this);
+    }
   }
 
   /**

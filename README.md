@@ -89,6 +89,9 @@ hello: привет
 --------------------------------------------------------------------------------
 
 ## Changelog
+### 0.3.0 [`Stable`]
+* **Added**: `#toUnderscore(defaultLang)` returns independent function `#get()` with specified default language
+
 ### 0.2.0 [`Stable`]
 * **Added**: `#toUnderscore()` returns independent function `#get()`
 

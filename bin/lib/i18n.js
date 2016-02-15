@@ -131,12 +131,27 @@ var I18n = (function () {
     };
     /**
      * Создает независимую функцию get
+     * @param  {string}   [defaultLang]
+     *
      * @return {Function}
      *
      * @member I18n#toUnderscore
      */
-    I18n.prototype.toUnderscore = function () {
-        return this.get.bind(this);
+    I18n.prototype.toUnderscore = function (defaultLang) {
+        // Устанавливаем дефолтный язык
+        if (defaultLang) {
+            return (function __(text, lang) {
+                if (lang) {
+                    return this.get(text, lang);
+                }
+                else {
+                    return this.get(text, defaultLang);
+                }
+            }).bind(this);
+        }
+        else {
+            return this.get.bind(this);
+        }
     };
     /**
      * Преобразование массива в таблицу ключ -> значение
