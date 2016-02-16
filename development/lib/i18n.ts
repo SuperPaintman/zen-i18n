@@ -44,7 +44,7 @@ class I18n {
    * 
    * @return {I18n}
    * 
-   * @constructs I18n
+   * @constructor I18n
    */
   constructor(options: I18nOptions) {
     this.options = _.merge({

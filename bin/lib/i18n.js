@@ -15,7 +15,7 @@ var I18n = (function () {
      *
      * @return {I18n}
      *
-     * @constructs I18n
+     * @constructor I18n
      */
     function I18n(options) {
         this.options = _.merge({
