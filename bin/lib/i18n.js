@@ -139,19 +139,19 @@ var I18n = (function () {
      */
     I18n.prototype.toUnderscore = function (defaultLang) {
         // Устанавливаем дефолтный язык
-        if (defaultLang) {
-            return (function __(text, lang) {
+        if (!defaultLang) {
+            defaultLang = this.options.default;
+        }
+        return (function (_this, defaultLang) {
+            return function __(text, lang) {
                 if (lang) {
-                    return this.get(text, lang);
+                    return _this.get.bind(_this)(text, lang);
                 }
                 else {
-                    return this.get(text, defaultLang);
+                    return _this.get.bind(_this)(text, defaultLang);
                 }
-            }).bind(this);
-        }
-        else {
-            return this.get.bind(this);
-        }
+            };
+        })(this, defaultLang);
     };
     /**
      * Преобразует хранящиеся переводы в JSON
