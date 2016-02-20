@@ -65,7 +65,22 @@ or angular
 const angular = require('angular');
 const i18n = require('zen-i18n/browser.angular');
 
-angular.module('App', [i18n]);
+angular.module('App', [i18n])
+.config([
+  'zenI18n',
+  (zenI18n) => {
+    zenI18n
+      .add({
+        "hello": 'hei'
+      }, 'fi');
+  }
+])
+.controller([
+  '$scope', 'zenI18n',
+  ($scope, __) => {
+    $scope.hello = __("hello", 'fi'); // "hei"
+  }
+]);
 
 // !!! Browser version can't load translation from files
 ```
@@ -327,6 +342,9 @@ console.log(i18n.toJSON('de')); // {"hello":"tschüss"}
 --------------------------------------------------------------------------------
 
 ## Changelog
+### 0.6.0 [`Stable`]
+* **Added**: angular `i18n` version: `zen-i18n/browser.angular`
+
 ### 0.5.0 [`Stable`]
 * **Added**: browser `i18n` version: `zen-i18n/browser`
 

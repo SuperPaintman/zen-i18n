@@ -1,6 +1,6 @@
 {
   "name": "zen-i18n",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "flexible i18n internationalization for node.js",
   "main": "./index.js",
   "author": {
@@ -24,9 +24,20 @@
     "globalization",
     "localization",
     "translation",
-    "internationalization"
+    "internationalization",
+    "angular",
+    "angular i18n",
+    "angular l10n",
+    "angular g11n",
+    "angular globalization",
+    "angular localization",
+    "angular translation",
+    "angular internationalization"
   ],
   "files": [
+    "index.js",
+    "browser.js",
+    "browser.angular.js",
     "development",
     "bin",
     "tsd.json",
