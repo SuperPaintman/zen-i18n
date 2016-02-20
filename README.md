@@ -170,6 +170,28 @@ i18n
 ```
 
 
+### I18n#addJSON(str, lang?): I18n
+**Arguments**
+* **str** {`String`} - JSON string
+* [**lang**] {`String`} - language of translations. If undefined, will assume that passed only one language.
+
+**Returns**
+* {`I18n`}
+
+**Example**
+
+```js
+'use strict';
+const I18n = require('zen-i18n');
+
+const i18n = new I18n();
+
+i18n
+  .addJSON('{"ru":{"hello":"привет","your name":"ваше имя","bye":"пока"},"de":{"bye":"tschüss"}}')
+  .addJSON('{"hello":"hei"}', 'fi');
+```
+
+
 ### I18n#get(text, lang?): String
 **Arguments**
 * **text** {`String`} - text
@@ -342,6 +364,9 @@ console.log(i18n.toJSON('de')); // {"hello":"tschüss"}
 --------------------------------------------------------------------------------
 
 ## Changelog
+### 0.7.0 [`Stable`]
+* **Added**: `#addJSON(str, lang?)` adds translations from JSON string
+
 ### 0.6.0 [`Stable`]
 * **Added**: angular `i18n` version: `zen-i18n/browser.angular`
 

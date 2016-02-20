@@ -15,6 +15,9 @@ function i18n() {
         add: function (translations, lang) {
             return i18n.add(translations, lang);
         },
+        addJSON: function (str, lang) {
+            return i18n.addJSON(str, lang);
+        },
         setLocale: function (lang) {
             return i18n.setLocale(lang);
         },

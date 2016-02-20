@@ -21,6 +21,10 @@ function i18n() {
       return i18n.add(translations, lang);
     },
 
+    addJSON: (str: string, lang?: string) => {
+      return i18n.addJSON(str, lang);
+    },
+
     setLocale: (lang: string) => {
       return i18n.setLocale(lang);
     },

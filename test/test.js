@@ -187,6 +187,54 @@ describe("I18n lib", () => {
     });
   });
 
+  /** addJSON */
+  describe("#addJSON(str)", () => {
+    /** Object */
+    it("should add translations from JSON string", function () {
+      const i18n = new I18n({
+        default: 'en'
+      });
+
+      i18n
+        .addJSON('{"ru":{"hello":"привет","your name":"ваше имя","bye":"пока"},"de":{"bye":"tschüss"}}');
+
+      assert.deepEqual(i18n.languages, {
+        ru: {
+          "hello": "привет",
+          "your name": "ваше имя",
+          "bye": "пока"
+        },
+        de: {
+          "bye": "tschüss"
+        }
+      });
+    });
+  });
+
+  describe("#addJSON(str, lang)", () => {
+    /** Object */
+    it("should add translations from JSON string", function () {
+      const i18n = new I18n({
+        default: 'en'
+      });
+
+      i18n
+        .addJSON('{"hello":"привет","your name":"ваше имя","bye":"пока"}', 'ru')
+        .addJSON('{"bye":"tschüss"}', 'de');
+
+      assert.deepEqual(i18n.languages, {
+        ru: {
+          "hello": "привет",
+          "your name": "ваше имя",
+          "bye": "пока"
+        },
+        de: {
+          "bye": "tschüss"
+        }
+      });
+    });
+  });
+
   /** Get */
   describe("#get(text, lang?)", () => {
     it("should return valid translation", function () {

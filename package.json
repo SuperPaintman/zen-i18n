@@ -1,6 +1,6 @@
 {
   "name": "zen-i18n",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "description": "flexible i18n internationalization for node.js",
   "main": "./index.js",
   "author": {

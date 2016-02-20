@@ -50,6 +50,28 @@ var I18n = (function () {
         return this;
     };
     /**
+     * Загрузка переводов из JSON файла
+     * @param  {string} str
+     * @param  {string} [lang] - если установлен, будет считать, что передан
+     *                           только один язык.
+     *
+     * @return {I18n}
+     */
+    I18n.prototype.addJSON = function (str, lang) {
+        var _this = this;
+        var translations = JSON.parse(str);
+        if (lang) {
+            this.add(translations, lang);
+        }
+        else {
+            var keys = Object.keys(translations);
+            keys.forEach(function (key) {
+                _this.add(translations[key], key);
+            });
+        }
+        return this;
+    };
+    /**
      * Перевод текста
      * @param  {String} text
      * @param  {String} [lang=default]   - имя языка. Если не установлено,

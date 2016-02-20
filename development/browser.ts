@@ -68,6 +68,29 @@ class I18n {
   }
 
   /**
+   * Загрузка переводов из JSON файла
+   * @param  {string} str
+   * @param  {string} [lang] - если установлен, будет считать, что передан 
+   *                           только один язык.
+   * 
+   * @return {I18n}
+   */
+  addJSON(str: string, lang?: string): I18n {
+    const translations = JSON.parse(str);
+
+    if (lang) {
+      this.add(translations, lang);
+    } else {
+      const keys = Object.keys(translations);
+      keys.forEach((key) => {
+        this.add(translations[key], key);
+      });
+    }
+
+    return this;
+  }
+
+  /**
    * Перевод текста
    * @param  {String} text
    * @param  {String} [lang=default]   - имя языка. Если не установлено,
