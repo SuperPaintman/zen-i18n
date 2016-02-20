@@ -30,7 +30,7 @@ class I18n {
    * 
    * @constructor I18n
    */
-  constructor(options: I18nOptions) {
+  constructor(options?: I18nOptions) {
     this.options = _.merge({
       default: 'en'
     }, options);
