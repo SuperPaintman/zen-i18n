@@ -89,6 +89,9 @@ hello: привет
 --------------------------------------------------------------------------------
 
 ## Changelog
+### 0.4.0 [`Stable`]
+* **Added**: `#toJSON(lang?)` returns JSON string with translations
+
 ### 0.3.0 [`Stable`]
 * **Added**: `#toUnderscore(defaultLang)` returns independent function `#get()` with specified default language
 

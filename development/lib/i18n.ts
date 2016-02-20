@@ -198,6 +198,24 @@ class I18n {
   }
 
   /**
+   * Преобразует хранящиеся переводы в JSON
+   * @param  {string} lang
+   * 
+   * @return {string}
+   */
+  toJSON(lang?: string): string {
+    if (lang) {
+      if (this.languages[lang]) {
+        return JSON.stringify(this.languages[lang]);
+      } else {
+        return JSON.stringify({});
+      }
+    } else {
+      return JSON.stringify(this.languages);
+    }
+  }
+
+  /**
    * Преобразование массива в таблицу ключ -> значение
    * @param  {Array|Object} data
    * 

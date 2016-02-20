@@ -493,4 +493,61 @@ describe("I18n lib", () => {
       assert.equal(__de("your name", 'ru'), "ваше имя");
     });
   });
+
+  /* toJSON */
+  describe("#toJSON()", () => {
+    it("should return valid translation", function () {
+      const i18n = new I18n({
+        default: 'en'
+      });
+
+      i18n
+        .add(path.join(__dirname, "./asset/ru_1.array.json"), 'ru')
+        .add(path.join(__dirname, "./asset/ru_2.object.yml"), 'ru')
+        .add({"bye": "tschüss"}, 'de');
+
+      assert.equal(i18n.toJSON(), JSON.stringify({
+        ru: {
+          "hello": "привет",
+          "your name": "ваше имя",
+          "bye": "пока"
+        },
+        de: {
+          "bye": "tschüss"
+        }
+      }));
+    });
+  });
+
+  describe("#toJSON(lang)", () => {
+    it("should return valid translation", function () {
+      const i18n = new I18n({
+        default: 'en'
+      });
+
+      i18n
+        .add(path.join(__dirname, "./asset/ru_1.array.json"), 'ru')
+        .add(path.join(__dirname, "./asset/ru_2.object.yml"), 'ru')
+        .add({"bye": "tschüss"}, 'de');
+
+      /* en */
+      assert.equal(i18n.toJSON('en'), JSON.stringify({}));
+
+      /* de */
+      assert.equal(i18n.toJSON('de'), JSON.stringify({
+        "bye": "tschüss"
+      }));
+
+      /* fi */
+      // such language is undefined
+      assert.equal(i18n.toJSON('fi'), JSON.stringify({}));
+
+      /* ru */
+      assert.equal(i18n.toJSON('ru'), JSON.stringify({
+        "hello": "привет",
+        "your name": "ваше имя",
+        "bye": "пока"
+      }));
+    });
+  });
 });
