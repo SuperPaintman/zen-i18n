@@ -85,6 +85,223 @@ hello: привет
 --------------------------------------------------------------------------------
 
 ## API
+### I18n(options)
+**Arguments**
+* **options** {`Object`} - token or options object
+  * [**default** = 'en'] {`String`} - default getter language
+
+**Returns**
+* {`I18n`}
+
+**Example**
+
+```js
+'use strict';
+const I18n = require('zen-i18n');
+
+const i18n = new I18n();
+```
+
+
+### I18n#add(filename, lang?): I18n
+**Arguments**
+* **filename** {`String|Object|Array`} - filename with translations or object/array-like translations
+* [**lang** = options.default] {`String`} - language of translations
+
+**Returns**
+* {`I18n`}
+
+**Example**
+
+```js
+'use strict';
+const I18n = require('zen-i18n');
+
+const i18n = new I18n();
+
+i18n
+  .add(`${__dirname}/locals/ru.yml`, 'ru')  // Filename
+  .add(`${__dirname}/locals/de.json`, 'de') // Filename
+  .add({  // Object-like
+    "hello": 'hei'
+  }, 'fi')
+  .add([{ // Array-like
+    from: `very long,
+           multiline text....`,
+    to:   `очень длинный,
+           многострочный текст....`,
+  }], 'ru');
+```
+
+
+### I18n#get(text, lang?): String
+**Arguments**
+* **text** {`String`} - text
+* [**lang** = currentLanguage] {`String`} - language of translations. By default set to `options.default` or currentLanguage from `#setLocale`
+
+**Returns**
+* {`String`}
+
+**Example**
+
+```js
+'use strict';
+const I18n = require('zen-i18n');
+
+const i18n = new I18n();
+
+i18n
+  .add({
+    "hello": 'tschüss'
+  }, 'de');
+
+console.log(i18n.get("hello", "de")); // 'tschüss'
+
+console.log(i18n.get("hello")); // hello
+
+// such language is undefined
+console.log(i18n.get("hello", "ru")); // hello
+```
+
+
+### I18n#setLocale(lang): I18n
+**Arguments**
+* **lang** {`String`} - name of language
+
+**Returns**
+* {`I18n`}
+
+**Example**
+
+```js
+'use strict';
+const I18n = require('zen-i18n');
+
+const i18n = new I18n();
+
+i18n
+  .add({
+    "hello": 'tschüss'
+  }, 'de');
+
+i18n.setLocale('de');
+console.log(i18n.get("hello")); // 'tschüss'
+
+console.log(i18n.get("hello", 'en')); // hello
+
+// such language is undefined
+i18n.setLocale('ru');
+console.log(i18n.get("hello")); // hello
+```
+
+
+### I18n#getLocale(): String
+**Returns**
+* {`String`} - current language name
+
+**Example**
+
+```js
+'use strict';
+const I18n = require('zen-i18n');
+
+const i18n = new I18n();
+
+i18n
+  .add({
+    "hello": 'tschüss'
+  }, 'de');
+
+console.log(i18n.getLocale()); // 'en'
+
+i18n.setLocale('de');
+console.log(i18n.getLocale()); // 'de'
+```
+
+
+### I18n#resetLocale(): I18n
+**Returns**
+* {`I18n`}
+
+**Example**
+
+```js
+'use strict';
+const I18n = require('zen-i18n');
+
+const i18n = new I18n();
+
+i18n
+  .add({
+    "hello": 'tschüss'
+  }, 'de');
+
+console.log(i18n.getLocale()); // 'en'
+
+i18n.setLocale('de');
+console.log(i18n.getLocale()); // 'de'
+
+i18n.resetLocale();
+console.log(i18n.getLocale()); // 'en'
+```
+
+
+### I18n#toUnderscore(defaultLang?): Function
+**Arguments**
+* [**defaultLang** = options.default] {`String`} - default language of function
+
+**Returns**
+* {`Function`}
+
+**Example**
+
+```js
+'use strict';
+const I18n = require('zen-i18n');
+
+const i18n = new I18n();
+
+i18n
+  .add({
+    "hello": 'tschüss'
+  }, 'de');
+
+const __ = i18n.toUnderscore();
+const __de = i18n.toUnderscore("de");
+
+console.log(__("hello", "de")); // 'tschüss'
+
+console.log(__de("hello")); // 'tschüss'
+```
+
+
+### I18n#toJSON(lang?): String
+**Arguments**
+* [**lang**] {`String`} - language
+
+**Returns**
+* {`String`}
+
+**Example**
+
+```js
+'use strict';
+const I18n = require('zen-i18n');
+
+const i18n = new I18n();
+
+i18n
+  .add({
+    "hello": 'tschüss'
+  }, 'de')
+  .add({
+    "hello": 'привет'
+  }, 'ru');
+
+console.log(i18n.toJSON()); // {"de":{"hello":"tschüss"},"ru":{"hello":"привет"}}
+
+console.log(i18n.toJSON('de')); // {"hello":"tschüss"}
+```
 
 --------------------------------------------------------------------------------
 
