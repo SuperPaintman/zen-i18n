@@ -1,5 +1,6 @@
 'use strict';
-/// <reference path="../../typings/tds.d.ts"/>
+/// <reference path="../../typings/tsd.d.ts"/>
+/// <reference path="./i18n.d.ts"/>
 /** Requires */
 var fs = require('fs');
 var path = require('path');

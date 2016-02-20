@@ -1,5 +1,6 @@
 'use strict';
-/// <reference path="../../typings/tds.d.ts"/>
+/// <reference path="../../typings/tsd.d.ts"/>
+/// <reference path="./i18n.d.ts"/>
 
 /** Requires */
 import * as fs         from 'fs';
@@ -9,23 +10,6 @@ import * as yaml       from 'js-yaml';
 
 interface I18nOptions {
   default: string;
-}
-
-interface I18nLangObj {
-  [from: string]: string
-}
-
-interface I18nArrItem {
-  from: string;
-  to: string;
-}
-
-interface I18nLanguages {
-  [lang: string]: I18nLangObj;
-}
-
-interface PathParseObj {
-  ext: string;
 }
 
 /**
