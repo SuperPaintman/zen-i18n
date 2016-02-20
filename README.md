@@ -49,6 +49,27 @@ i18n.resetLocale();
 console.log(__('hello')); // -> hello
 ```
 
+or in browser with [webpack][github-webpack-link] / [browserify][github-browserify-link]
+
+```js
+'use strict';
+const I18n = require('zen-i18n/browser');
+
+// !!! Browser version can't load translation from files
+```
+
+or angular
+
+```js
+'use strict';
+const angular = require('angular');
+const i18n = require('zen-i18n/browser.angular');
+
+angular.module('App', [i18n]);
+
+// !!! Browser version can't load translation from files
+```
+
 ### File examples
 The file content type and its extension detected automatically.
 
@@ -306,6 +327,9 @@ console.log(i18n.toJSON('de')); // {"hello":"tschüss"}
 --------------------------------------------------------------------------------
 
 ## Changelog
+### 0.5.0 [`Stable`]
+* **Added**: browser `i18n` version: `zen-i18n/browser`
+
 ### 0.4.0 [`Stable`]
 * **Added**: `#toJSON(lang?)` returns JSON string with translations
 
@@ -331,6 +355,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 [github-author-link]: http://github.com/SuperPaintman
 [wikipedia-link]: https://en.wikipedia.org/wiki/Internationalization_and_localization
+[github-webpack-link]: https://github.com/webpack/webpack
+[github-browserify-link]: https://github.com/substack/node-browserify
 [npm-url]: https://www.npmjs.com/package/zen-i18n
 [npm-v-image]: https://img.shields.io/npm/v/zen-i18n.svg
 [npm-dm-image]: https://img.shields.io/npm/dm/zen-i18n.svg
