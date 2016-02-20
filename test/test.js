@@ -485,6 +485,16 @@ describe("I18n lib", () => {
       assert.equal(__("hello", 'ru'), "привет");
       assert.equal(__("bye", 'ru'), "пока");
       assert.equal(__("your name", 'ru'), "ваше имя");
+
+      /* statics */
+      assert.deepEqual(__.add({"hi": "привет"}), i18n.add({"hi": "привет"}));
+      assert.deepEqual(__.addJSON("{}"), i18n.addJSON("{}"));
+      assert.deepEqual(__.get("hi"), i18n.get("hi"));
+      assert.deepEqual(__.setLocale("ru"), i18n.setLocale("ru"));
+      assert.deepEqual(__.getLocale(), i18n.getLocale());
+      assert.deepEqual(__.resetLocale(), i18n.resetLocale());
+      assert.deepEqual(__.toUnderscore().toString(), i18n.toUnderscore().toString());
+      assert.deepEqual(__.toJSON(), i18n.toJSON());
     });
   });
 
@@ -539,6 +549,16 @@ describe("I18n lib", () => {
       assert.equal(__de("hello", 'ru'), "привет");
       assert.equal(__de("bye", 'ru'), "пока");
       assert.equal(__de("your name", 'ru'), "ваше имя");
+
+      /* statics */
+      assert.deepEqual(__de.add({"hi": "привет"}), i18n.add({"hi": "привет"}));
+      assert.deepEqual(__de.addJSON("{}"), i18n.addJSON("{}"));
+      assert.deepEqual(__de.get("hi"), i18n.get("hi"));
+      assert.deepEqual(__de.setLocale("ru"), i18n.setLocale("ru"));
+      assert.deepEqual(__de.getLocale(), i18n.getLocale());
+      assert.deepEqual(__de.resetLocale(), i18n.resetLocale());
+      assert.deepEqual(__de.toUnderscore().toString(), i18n.toUnderscore().toString());
+      assert.deepEqual(__de.toJSON(), i18n.toJSON());
     });
   });
 

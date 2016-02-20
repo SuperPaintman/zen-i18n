@@ -172,13 +172,24 @@ class I18n {
     }
 
     return (function (_this, defaultLang) {
-      return function __(text: string, lang?: string): string {
+      function __(text: string, lang?: string): string {
         if (lang) {
           return _this.get.bind(_this)(text, lang);
         } else {
           return _this.get.bind(_this)(text, defaultLang);
         }
-      };
+      }
+      /* @todo заменить на нормальную реализацию */
+      (<any>__).add            = _this.add.bind(_this);
+      (<any>__).addJSON        = _this.addJSON.bind(_this);
+      (<any>__).get            = _this.get.bind(_this);
+      (<any>__).setLocale      = _this.setLocale.bind(_this);
+      (<any>__).getLocale      = _this.getLocale.bind(_this);
+      (<any>__).resetLocale    = _this.resetLocale.bind(_this);
+      (<any>__).toUnderscore   = _this.toUnderscore.bind(_this);
+      (<any>__).toJSON         = _this.toJSON.bind(_this);
+
+      return __;
     })(this, defaultLang);
   }
 

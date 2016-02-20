@@ -51,9 +51,7 @@ function i18n() {
 
     $get: [
       () => {
-        return function __(text: string, lang?: string): string {
-          return i18n.get(text, lang);
-        }
+        return i18n.toUnderscore();
       }
     ]
   };

@@ -166,14 +166,24 @@ var I18n = (function () {
             defaultLang = this.options.default;
         }
         return (function (_this, defaultLang) {
-            return function __(text, lang) {
+            function __(text, lang) {
                 if (lang) {
                     return _this.get.bind(_this)(text, lang);
                 }
                 else {
                     return _this.get.bind(_this)(text, defaultLang);
                 }
-            };
+            }
+            /* @todo заменить на нормальную реализацию */
+            __.add = _this.add.bind(_this);
+            __.addJSON = _this.addJSON.bind(_this);
+            __.get = _this.get.bind(_this);
+            __.setLocale = _this.setLocale.bind(_this);
+            __.getLocale = _this.getLocale.bind(_this);
+            __.resetLocale = _this.resetLocale.bind(_this);
+            __.toUnderscore = _this.toUnderscore.bind(_this);
+            __.toJSON = _this.toJSON.bind(_this);
+            return __;
         })(this, defaultLang);
     };
     /**

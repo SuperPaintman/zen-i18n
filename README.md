@@ -364,6 +364,9 @@ console.log(i18n.toJSON('de')); // {"hello":"tschüss"}
 --------------------------------------------------------------------------------
 
 ## Changelog
+### 0.8.0 [`Stable`]
+* **Added**: `#toUnderscore` now inherits all methods from i18n, except `_transform`
+
 ### 0.7.0 [`Stable`]
 * **Added**: `#addJSON(str, lang?)` adds translations from JSON string
 

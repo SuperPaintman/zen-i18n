@@ -38,9 +38,7 @@ function i18n() {
         },
         $get: [
             function () {
-                return function __(text, lang) {
-                    return i18n.get(text, lang);
-                };
+                return i18n.toUnderscore();
             }
         ]
     };
