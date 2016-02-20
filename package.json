@@ -1,6 +1,6 @@
 {
   "name": "zen-i18n",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "flexible i18n internationalization for node.js",
   "main": "./index.js",
   "author": {
@@ -40,6 +40,7 @@
     "browser.angular.js",
     "development",
     "bin",
+    "dist",
     "tsd.json",
     "tsconfig.json",
     "README",
@@ -57,9 +58,12 @@
   "devDependencies": {
     "assert": "^1.3.0",
     "gulp": "^3.9.1",
+    "gulp-browserify": "^0.5.1",
     "gulp-eslint": "^1.1.1",
     "gulp-plumber": "^1.1.0",
+    "gulp-rename": "^1.2.2",
     "gulp-typescript": "^2.11.0",
+    "gulp-uglify": "^1.5.2",
     "gulp-util": "^3.0.7",
     "js-yaml": "^3.5.3",
     "mocha": "^2.4.5",
