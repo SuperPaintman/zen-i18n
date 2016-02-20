@@ -36,8 +36,12 @@ function i18n() {
         get: function (text, lang) {
             return i18n.get(text, lang);
         },
-        $get: function (text, lang) {
-            return i18n.get(text, lang);
-        }
+        $get: [
+            function () {
+                return function __(text, lang) {
+                    return i18n.get(text, lang);
+                };
+            }
+        ]
     };
 }

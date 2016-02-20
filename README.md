@@ -67,9 +67,9 @@ const i18n = require('zen-i18n/browser.angular');
 
 angular.module('App', [i18n])
 .config([
-  'zenI18n',
-  (zenI18n) => {
-    zenI18n
+  'zenI18nProvider',
+  (zenI18nProvider) => {
+    zenI18nProvider
       .add({
         "hello": 'hei'
       }, 'fi');
