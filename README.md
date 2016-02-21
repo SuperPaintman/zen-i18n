@@ -8,7 +8,7 @@
 
 [![Logo](/README/logo.png)][npm-url]
 
-Flexible [**i18n**][wikipedia-link] internationalization for **node.js**
+Flexible [**i18n**][wikipedia-link] internationalization for **browser** and **node.js**
 
 
 ## Installation
