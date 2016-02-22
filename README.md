@@ -304,35 +304,6 @@ console.log(i18n.getLocale()); // 'en'
 ```
 
 
-### I18n#toUnderscore(defaultLang?): Function
-**Arguments**
-* [**defaultLang** = options.default] {`String`} - default language of function
-
-**Returns**
-* {`Function`}
-
-**Example**
-
-```js
-'use strict';
-const I18n = require('zen-i18n');
-
-const i18n = new I18n();
-
-i18n
-  .add({
-    "hello": 'tschüss'
-  }, 'de');
-
-const __ = i18n.toUnderscore();
-const __de = i18n.toUnderscore("de");
-
-console.log(__("hello", "de")); // 'tschüss'
-
-console.log(__de("hello")); // 'tschüss'
-```
-
-
 ### I18n#toJSON(lang?): String
 **Arguments**
 * [**lang**] {`String`} - language
@@ -364,6 +335,9 @@ console.log(i18n.toJSON('de')); // {"hello":"tschüss"}
 --------------------------------------------------------------------------------
 
 ## Changelog
+### 0.9.0 [`Stable`]
+* **Removed**: `#toUnderscore(defaultLang)` because it complicates the API
+
 ### 0.8.0 [`Stable`]
 * **Added**: `#toUnderscore` now inherits all methods from i18n, except `_transform`
 

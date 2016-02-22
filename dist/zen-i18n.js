@@ -135,25 +135,23 @@ var I18n = (function () {
         return this;
     };
     /**
-     * Создает независимую функцию get
-     * @param  {string}   [defaultLang]
+     * Создает обертку над объектом, для использования как __
      *
      * @return {Function}
      *
      * @member I18n#toUnderscore
      */
     I18n.prototype.toUnderscore = function (defaultLang) {
-        // Устанавливаем дефолтный язык
-        if (!defaultLang) {
-            defaultLang = this.options.default;
+        if (defaultLang) {
+            throw new Error("Sorry, #toUnderscore with specified default language is deprecated. Please use #setLocale");
         }
-        return (function (_this, defaultLang) {
+        return (function (_this) {
             function __(text, lang) {
                 if (lang) {
                     return _this.get.bind(_this)(text, lang);
                 }
                 else {
-                    return _this.get.bind(_this)(text, defaultLang);
+                    return _this.get.bind(_this)(text);
                 }
             }
             /* @todo заменить на нормальную реализацию */
@@ -166,7 +164,7 @@ var I18n = (function () {
             __.toUnderscore = _this.toUnderscore.bind(_this);
             __.toJSON = _this.toJSON.bind(_this);
             return __;
-        })(this, defaultLang);
+        })(this);
     };
     /**
      * Преобразует хранящиеся переводы в JSON

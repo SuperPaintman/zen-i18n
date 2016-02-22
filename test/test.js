@@ -496,10 +496,8 @@ describe("I18n lib", () => {
       assert.deepEqual(__.toUnderscore().toString(), i18n.toUnderscore().toString());
       assert.deepEqual(__.toJSON(), i18n.toJSON());
     });
-  });
 
-  describe("#toUnderscore(defaultLang)", () => {
-    it("should return valid translation", function () {
+    it("should return valid translation with setLocale", function () {
       const i18n = new I18n({
         default: 'en'
       });
@@ -512,53 +510,112 @@ describe("I18n lib", () => {
         .add({"bye": "пока"}, 'ru')
         .add({"bye": "tschüss"}, 'de');
 
-      const __en = i18n.toUnderscore('en');
-      const __ru = i18n.toUnderscore('ru');
-      const __de = i18n.toUnderscore('de');
+      const __ = i18n.toUnderscore();
 
-      // Without lang
+      // Equivalent to the original function
       /* en */
-      assert.equal(__en("hello"), "hello");
-      assert.equal(__en("bye"), "bye");
-      assert.equal(__en("your name"), "your name");
+      __.setLocale('en');
+      assert.equal(__("hello"), "hello");
+      assert.equal(__("bye"), "bye");
+      assert.equal(__("your name"), "your name");
 
       /* de */
-      assert.equal(__de("bye"), "tschüss");
+      __.setLocale('de');
+      assert.equal(__("bye"), "tschüss");
       // such word is undefined
-      assert.equal(__de("hello"), "hello");
-      assert.equal(__de("your name"), "your name");
+      assert.equal(__("hello"), "hello");
+      assert.equal(__("your name"), "your name");
+
+      /* fi */
+      __.setLocale('fi');
+      // such language is undefined
+      assert.equal(__("hello"), "hello");
+      assert.equal(__("bye"), "bye");
+      assert.equal(__("your name"), "your name");
 
       /* ru */
-      assert.equal(__ru("hello"), "привет");
-      assert.equal(__ru("bye"), "пока");
-      assert.equal(__ru("your name"), "ваше имя");
+      __.setLocale('ru');
+      assert.equal(__("hello"), "привет");
+      assert.equal(__("bye"), "пока");
+      assert.equal(__("your name"), "ваше имя");
+    });
 
-      // With lang
+    it("should return valid translation with resetLocale", function () {
+      const i18n = new I18n({
+        default: 'en'
+      });
+
+      i18n
+        .add({
+          "hello": "привет",
+          "your name": "ваше имя"
+        }, 'ru')
+        .add({"bye": "пока"}, 'ru')
+        .add({"bye": "tschüss"}, 'de');
+
+      const __ = i18n.toUnderscore();
+
+      // Equivalent to the original function
       /* en */
-      assert.equal(__de("hello", 'en'), "hello");
-      assert.equal(__de("bye", 'en'), "bye");
-      assert.equal(__de("your name", 'en'), "your name");
+      __.setLocale('en');
+      __.resetLocale();
+      assert.equal(__("hello"), "hello");
+      assert.equal(__("bye"), "bye");
+      assert.equal(__("your name"), "your name");
 
       /* de */
-      assert.equal(__en("bye", 'de'), "tschüss");
-      // such word is undefined
-      assert.equal(__en("hello", 'de'), "hello");
-      assert.equal(__en("your name", 'de'), "your name");
+      __.setLocale('de');
+      __.resetLocale();
+      assert.equal(__("hello"), "hello");
+      assert.equal(__("bye"), "bye");
+      assert.equal(__("your name"), "your name");
 
       /* ru */
-      assert.equal(__de("hello", 'ru'), "привет");
-      assert.equal(__de("bye", 'ru'), "пока");
-      assert.equal(__de("your name", 'ru'), "ваше имя");
+      __.setLocale('ru');
+      __.resetLocale();
+      assert.equal(__("hello"), "hello");
+      assert.equal(__("bye"), "bye");
+      assert.equal(__("your name"), "your name");
+    });
 
-      /* statics */
-      assert.deepEqual(__de.add({"hi": "привет"}), i18n.add({"hi": "привет"}));
-      assert.deepEqual(__de.addJSON("{}"), i18n.addJSON("{}"));
-      assert.deepEqual(__de.get("hi"), i18n.get("hi"));
-      assert.deepEqual(__de.setLocale("ru"), i18n.setLocale("ru"));
-      assert.deepEqual(__de.getLocale(), i18n.getLocale());
-      assert.deepEqual(__de.resetLocale(), i18n.resetLocale());
-      assert.deepEqual(__de.toUnderscore().toString(), i18n.toUnderscore().toString());
-      assert.deepEqual(__de.toJSON(), i18n.toJSON());
+    it("should return valid translation with getLocale", function () {
+      const i18n = new I18n({
+        default: 'en'
+      });
+
+      i18n
+        .add({
+          "hello": "привет",
+          "your name": "ваше имя"
+        }, 'ru')
+        .add({"bye": "пока"}, 'ru')
+        .add({"bye": "tschüss"}, 'de');
+
+      const __ = i18n.toUnderscore();
+
+      // Equivalent to the original function
+      assert.equal(__.getLocale(), "en");
+
+      /* en */
+      __.setLocale('en');
+      assert.equal(__.getLocale(), "en");
+
+      /* de */
+      __.setLocale('de');
+      assert.equal(__.getLocale(), "de");
+
+      /* fi */
+      __.setLocale('fi');
+      assert.equal(__.getLocale(), "en");
+
+      /* ru */
+      __.setLocale('ru');
+      assert.equal(__.getLocale(), "ru");
+
+      /* reset */
+      __.setLocale('ru');
+      __.resetLocale();
+      assert.equal(__.getLocale(), "en");
     });
   });
 
